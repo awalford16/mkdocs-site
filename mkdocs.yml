@@ -1,0 +1,8 @@
+site_name: AWNET
+repo_url: https://github.com/awalford16/awalford16.github.io
+
+plugins:
+  - awesome-pages
+
+theme:
+  name: simple-blog
