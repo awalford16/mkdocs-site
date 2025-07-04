@@ -1,3 +1,5 @@
+# Deploying a Ceph Cluster with cephadm
+
 ## Host Setup
 
 For a Ceph cluster you require a minimum of 3 hosts. This setup was done using Rocky Linux 9 so commands used here will only work with a CentOS distro.
@@ -26,8 +28,13 @@ From the primary monitor host, run the following commands to bootstrap the Ceph 
 cephadm bootstrap --mon-ip=MONITOR_IP
 ```
 
-
 ## Add Hosts to Cluster
+
+Firstly, the public key generated for the Ceph cluster needs to be shared to the other cluster hosts:
+
+```
+ssh-copy-id -f -i /etc/ceph/ceph.pub root@$HOST_IP
+```
 
 From the primary host, run the following commands to add a new host to the Ceph cluster:
 
@@ -57,7 +64,7 @@ The Ceph OSD is deployed on Ceph cluster hosts to manage block storage devices.
 The below command will show what devices are available from what hosts:
 
 ```
-ceph orch device ls
+ceph orch device ls --refresh
 
 ##########################################################################################################################################################
 HOST    PATH      TYPE  DEVICE ID                                                 SIZE  AVAILABLE  REFRESHED  REJECT REASONS
@@ -79,6 +86,21 @@ ceph orch apply osd --all-available-devices
 # Alternatively target specific device
 ceph orch daemon add osd ceph-1:/dev/sdb
 ```
+
+You can be even more granular with the OSD specifications using the Ceph orchestrator. Below is an example of a yaml file which specifies to use spinning disks for the OSD and the Bluestore database to be configured on SSD.
+
+```yaml
+service_type: osd
+service_id: osd_all
+placement:
+  host_pattern: ceph-0
+data_devices:
+  rotational: 1
+db_devices:
+  rotational: 0
+```
+
+This will deploy a new orch service which
 
 A new OSD daemon conatiner will be visible under the podman running containers. Once they have registered, the storage should be visible on the cluster:
 

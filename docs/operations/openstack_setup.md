@@ -25,3 +25,15 @@ Traffic between this node and compute nodes uses the management network. It is r
 ### Nova
 
 Nova is the service for handling Virtual machines on hosts. Under the hood it uses KVM (`virsh`), a linux hypervisor built into a kernel module. So from a host running Nova, you can run `virsh list` to view the active VMs on that host.
+
+### Ironic
+
+Ironic is the service which manages the baremetal hosts within Openstack. New baremetal hosts are registered with the Ironic service.
+
+Ironic keeps track of the state of the host. See this diagram for more details: https://docs.openstack.org/ironic/latest/_images/states.svg
+
+Once a host is managed by Ironic, it will be viewable by the openstack admin using the command below:
+
+```
+openstack baremetal node list
+```
