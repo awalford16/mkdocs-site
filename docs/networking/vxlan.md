@@ -1,8 +1,8 @@
-# Understanding VXLAN
+## What is VXLAN?
 
 VXLAN uses UDP port 4789
 
-In a physical network (underlay network) setup, the network may be segmented by multiple s"ubnets which require layer 3 routing to route between hosts. This is not ideal in cloud solutions when virtual machines are deployed in the same virtual network but deployed to hosts in separate underlay networks.
+In a physical network (underlay network) setup, the network may be segmented by multiple subnets which require layer 3 routing to route between hosts. This is not ideal in cloud solutions when virtual machines are deployed in the same virtual network but deployed to hosts in separate underlay networks.
 
 VXLAN is an overlay network designed so that virtual machines on hosts in two different subnets can talk to each other from what appears to be layer 2. This is achieved with virtual switches running on the hypervisor which encapsulates the layer 2 packets with information that allows it to traverse the layer 3 network between hypervisor hosts.
 
