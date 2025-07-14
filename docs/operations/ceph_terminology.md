@@ -9,13 +9,14 @@ CRUSH rules are assigned to a pool so objects stored as part of that pool are al
 The CRUSH rules assigned to specific OSDs can be viewed with one of the following commands:
 
 ```
+ceph osd crush rule ls
 ceph osd pool ls detail
 ceph osd pool get POOL_NAME crush_rule
 ```
 
 ## Placement Groups
 
-Ceph can allocate OSDs to a "pool" which can be allocated for specific types of data. When pools are created, it also creates a set of PGs. 
+Ceph can allocate OSDs to a "pool" which can be allocated for specific types of data. When pools are created, it also creates a set of PGs.
 
 PGs are identified with the format of `POOL_ID.PG_ID` where the PG ID is a hexidecimal number. Each of these PGs map to a random set of OSDs which can be viewed by running the command `ceph pg map $PG_ID`.
 
@@ -37,7 +38,7 @@ Placement groups should preferably be in an active and clean state. The state ca
 ceph pg stat
 ```
 
-## Protecetion Mechanisms
+## Protection Mechanisms
 
 ### Replication
 
@@ -46,7 +47,6 @@ Replication will replicate an object X times. It will be sent to 3 different pla
 When sending the data, the object will only be sent once (to th primary OSD). The primary OSD will then replicate the file accordingly to other OSDs.
 
 The maximum usable storage of a Ceph cluster will depend on the replication configuration. If replication is set to 3 on a 100TB cluster, only 33.3TB will be usable.
-
 
 ### Erasure Encoding
 
@@ -70,4 +70,19 @@ To understand the overhead associated with the k/m values of the profile, see th
 
 ## Applications
 
-Applications refer to the client usage of a Ceph pool.
+Applications refer to the client usage of a Ceph pool. You can enable specific applications on pools such as object storage or block storage.
+
+```
+# Enable block storage on ceph pool
+ceph osd pool application enable $POOL_NAME rbd
+```
+
+## CephFS and MDS
+
+MDS is the filesystem daemon required to be running for `cephfs` to work. It stands for Metadata Server.
+
+CephFS setups require a metadata pool and a data pool when being configured
+
+## RGW
+
+RGW stands for Rados Gateway.

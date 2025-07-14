@@ -30,7 +30,9 @@ Nova is the service for handling Virtual machines on hosts. Under the hood it us
 
 Ironic is the service which manages the baremetal hosts within Openstack. New baremetal hosts are registered with the Ironic service.
 
-Ironic keeps track of the state of the host. See this diagram for more details: https://docs.openstack.org/ironic/latest/_images/states.svg
+Ironic keeps track of the state of the host. See this diagram for more details: https://docs.openstack.org/ironic/latest/_images/states.svg. Detail of the states is also provided in [Openstack Ironic States](./openstack_ironic_states.md)
+
+You can manage baremetal nodes in Ironic with the `openstack baremetal node` CLI, which allows for a host to be transitioned through different states and be put into maintenance mode.
 
 Once a host is managed by Ironic, it will be viewable by the openstack admin using the command below:
 
