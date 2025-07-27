@@ -1,15 +1,19 @@
 ## ARP
 
-Address Resolution Protocol is an protocol for discovering devices on the local network. A device will send a broadcast message out asking for a device with a particular IP address. This broadcast will reach every device on the layer 2 network. The device that has that IP address will respond to the ARP request with its MAC address. 
+Address Resolution Protocol is an protocol for discovering devices on the local network. A device will send a broadcast message out asking for a device with a particular IP address. This broadcast will reach every device on the layer 2 network. The device that has that IP address will respond to the ARP request with its MAC address.
 
 ARP packets are sent when a device does not know how to reach another device on the same network. Once ARP is successful the device will no longer need to send ARP requests everytime it needs to route to that device, it knows the target MAC address and can route the reqeust accordingly.
 
-Devices will then build ARP tables, keeping track of the MAC address of particular devices. 
+Devices will then build ARP tables, keeping track of the MAC address of particular devices.
 
 ```
 # Show MAC Address table on mac or linux
 arp -a
 ```
+
+## Gratuitous ARP
+
+Gratuitous ARP works in the opposite direction to ARP. Instead of waiting for a device to ask for an IP address, a device broadcasts its IP address across the network.
 
 ## Broadcast
 
@@ -42,7 +46,6 @@ The OSI model refers to the different layers traversed by data between 2 devices
 5. Session Layer (Port information)
 6. Presentation Layer
 7. Application Layer
-
 
 ## VLAN
 

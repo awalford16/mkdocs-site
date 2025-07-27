@@ -1,5 +1,3 @@
-# Service Deployment with Kayobe
-
 Openstack can be deployed in a number of ways. A popular tool for deployment is Kayobe which deploys the Openstack services to machines as docker containers.
 
 Kayobe uses kolla-ansible to automate the deployment of Openstack services.
