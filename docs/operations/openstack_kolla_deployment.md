@@ -34,3 +34,32 @@ kayobe seed service deploy
 # Deploy services for overcloud hosts
 kayobe overcloud service deploy
 ```
+
+## Service Upgrade
+
+This docs assumes an Openstack deployment with Kayobe. Official Github docs for updates can be found [here](https://github.com/stackhpc/stackhpc-kayobe-config/blob/staggered-upgrade/doc/source/operations/upgrading-openstack.rst#ovs)
+
+### Overcloud
+
+```
+# Make database backup
+kayobe overcloud database backup
+
+# Pull host containers
+kayobe overcloud container image pull
+
+# Update host packages
+kayobe overcloud host package update --packages "*"
+
+# Update host components (pip packages etc.)
+kayobe overcloud host upgrade
+
+# Stop health manager service (from controllers)
+# Checking for loadbalancer states to see if they need to failover (upgrade can cause them to go into an error state)
+# Loadbalancers wont come out of error state
+docker stop octavia_health_manager
+
+# Upgrade services
+# Skip sensitive services like nova and networking services
+kayobe overcloud service upgrade --kolla-skip-tags neutron,nova,openvswitch
+```
