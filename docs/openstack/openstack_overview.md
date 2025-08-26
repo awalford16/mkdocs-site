@@ -63,3 +63,11 @@ More detail can be found in [Openstack Networking](./openstack_networking.md).
 | Cinder  | Block storage service responsible for integrating with block storage devices to provision volumes and mount volumes to hosts. |
 | Swift   | Object storage for storing VM images and data.                                                                                |
 | Manila  | Provides file shares to virtual machines                                                                                      |
+
+### Glance
+
+Manages images in Openstack which are used for VM provisioning.
+
+### Octavia
+
+Manages Loadbalancer resources.
